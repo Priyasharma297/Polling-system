@@ -133,11 +133,12 @@ const TeacherDashboard = () => {
                     type="text"
                     value={opt.text}
                     onChange={(e) => handleOptionChange(index, e.target.value)}
-                    className="flex-1 bg-gray-50 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="flex-1 min-w-0 bg-gray-50 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder={`Option ${index + 1}`}
                   />
                 </div>
-                <div className="flex items-center gap-4 text-sm flex-wrap sm:flex-nowrap">
+                {/* Fixed flex-nowrap for Yes/No radios */}
+                <div className="flex items-center gap-2 text-sm flex-nowrap">
                   <label className="flex items-center space-x-2 text-sm font-medium">
                     <input
                       type="radio"
