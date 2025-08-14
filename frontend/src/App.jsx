@@ -38,12 +38,10 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 bg-white text-dark">
-      {/* Badge */}
       <span className="text-xs sm:text-sm font-semibold px-3 py-1 rounded-full bg-primary text-white mb-4">
         ✨ Intervue Poll
       </span>
 
-      {/* Heading */}
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-2 px-2">
         Welcome to the <span className="font-bold text-black">Live Polling System</span>
       </h1>
@@ -51,14 +49,13 @@ const Home = () => {
         Please select the role that best describes you to begin using the live polling system
       </p>
 
-      {/* Role Selection Cards */}
       <div className="flex flex-col sm:flex-row gap-4 mb-8 w-full max-w-xl">
         <div
           onClick={() => setSelectedRole("student")}
           className={`flex-1 border rounded-xl p-5 cursor-pointer transition-all duration-300 transform
             ${selectedRole === "student"
               ? "border-primary shadow-md scale-105"
-              : "border-gray-300 bg-white hover:border-primary hover:shadow-md hover:scale-105"
+              : "border-gray-300 bg-white hover:border-primary hover:shadow-md hover:scale-105 hover:bg-gray-50"
             }`}
         >
           <h3 className="font-bold text-lg sm:text-xl mb-1 text-center sm:text-left">I’m a Student</h3>
@@ -72,7 +69,7 @@ const Home = () => {
           className={`flex-1 border rounded-xl p-5 cursor-pointer transition-all duration-300 transform
             ${selectedRole === "teacher"
               ? "border-primary shadow-md scale-105"
-              : "border-gray-300 bg-white hover:border-primary hover:shadow-md hover:scale-105"
+              : "border-gray-300 bg-white hover:border-primary hover:shadow-md hover:scale-105 hover:bg-gray-50"
             }`}
         >
           <h3 className="font-bold text-lg sm:text-xl mb-1 text-center sm:text-left">I’m a Teacher</h3>
@@ -82,7 +79,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Continue Button */}
       <button
         onClick={handleContinue}
         className="bg-primary hover:bg-secondary text-white px-6 sm:px-8 py-3 rounded-full text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105"
