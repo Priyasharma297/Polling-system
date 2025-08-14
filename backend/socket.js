@@ -3,7 +3,7 @@ import Student from "./models/Student.js";
 import Response from "./models/Response.js";
 import Message from "./models/Message.js";
 
-const connectedStudents = {}; // socket.id => name mapping
+const connectedStudents = {}; 
 
 // Get updated list of students after kicking
 async function getUpdatedList() {
@@ -108,7 +108,6 @@ export default function socketHandler(socket, io) {
         io.emit("poll-results", result);
     });
 
-    // History of the poll
     socket.on("get-poll-history", async () => {
         const polls = await Poll.find({}).sort({ createdAt: -1 }).limit(10);
         const allResults = [];
@@ -159,7 +158,6 @@ export default function socketHandler(socket, io) {
         io.emit('participants:update', updatedList);
     });
 
-    // Disconnect cleanup
     socket.on("disconnect", async () => {
         await Student.deleteOne({ socketId: socket.id });
         delete connectedStudents[socket.id];

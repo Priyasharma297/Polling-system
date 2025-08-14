@@ -13,35 +13,27 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// Enable CORS for frontend access
 app.use(cors());
 app.use(express.json());
 
-// Create the Socket.IO server
 const io = new Server(server, {
     cors: {
-        origin: "*", // You can restrict this to your frontend domain in production
+        origin: "*", 
         methods: ["GET", "POST"]
     }
 });
-
-// MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("✅ MongoDB connected successfully"))
     .catch((err) => console.error("❌ MongoDB error:", err));
-
-// Socket.IO logic
 io.on("connection", (socket) => {
     console.log("🟢 Client connected:", socket.id);
     socketHandler(socket, io);
 });
 
-// Basic test route
 app.get("/", (req, res) => {
     res.send("🎉 Polling server is running!");
 });
 
-// GET /api/polls/history
 app.get("/api/polls/history", async (req, res) => {
     try {
         const polls = await Poll.find().sort({ createdAt: -1 });
@@ -86,8 +78,6 @@ app.get("/api/polls/history", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch poll history" });
     }
 });
-
-// Start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
