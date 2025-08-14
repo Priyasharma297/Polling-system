@@ -134,8 +134,6 @@ const StudentDashboard = () => {
                         <div className="min-h-screen flex items-center justify-center bg-white px-4 sm:px-6">
                             <div className="w-full max-w-full sm:max-w-3xl lg:max-w-6xl p-4 sm:p-6 rounded-xl shadow-md space-y-6 bg-white">
                                 <h2 className="text-center text-xl sm:text-2xl font-semibold">Welcome, {name}!</h2>
-
-                                {/* Show Question */}
                                 {!submitted && (
                                     <PollQuestion
                                         question={question}
@@ -145,15 +143,11 @@ const StudentDashboard = () => {
                                         timer={timer}
                                     />
                                 )}
-
-                                {/* Waiting */}
                                 {submitted && !result && (
                                     <div className="text-center mt-4 text-purple-600 text-lg sm:text-xl font-medium">
                                         Waiting for results...
                                     </div>
                                 )}
-
-                                {/* Show Results */}
                                 {result && (
                                     <PollQuestion
                                         question={question}

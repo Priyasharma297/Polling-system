@@ -60,7 +60,6 @@ const ChatSidebar = () => {
 
     return (
         <>
-            {/* Floating Button */}
             <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
                 <button
                     className="bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition"
@@ -70,10 +69,9 @@ const ChatSidebar = () => {
                 </button>
             </div>
 
-            {/* Sidebar Panel */}
             {open && (
                 <div className="fixed bottom-20 right-2 sm:right-6 w-11/12 sm:w-96 bg-white rounded-xl shadow-2xl border border-gray-200 z-40 flex flex-col animate-slide-in max-h-[80vh] sm:h-80">
-                    {/* Tabs */}
+
                     <div className="flex border-b border-gray-300">
                         {['chat', 'participants'].map((tabName) => (
                             <button
@@ -89,7 +87,6 @@ const ChatSidebar = () => {
                         ))}
                     </div>
 
-                    {/* Content Area */}
                     <div className="flex-1 flex flex-col p-4 overflow-hidden">
                         {tab === 'chat' ? (
                             <div className="flex flex-col h-full">
@@ -119,7 +116,7 @@ const ChatSidebar = () => {
                                     )}
                                     <div ref={messagesEndRef}></div>
                                 </div>
-                                {/* Input Area */}
+
                                 <div className="flex gap-2 mt-2">
                                     <input
                                         type="text"
@@ -172,7 +169,6 @@ const ChatSidebar = () => {
                 </div>
             )}
 
-            {/* Slide-in animation */}
             <style jsx>{`
                 .animate-slide-in {
                     animation: slide-in 0.3s ease-out;

@@ -47,7 +47,7 @@ const LiveResults = () => {
             <ChatSidebar/>
             <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 bg-white text-dark">
                 <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-6xl">
-                    {/* Header */}
+
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2 sm:gap-0">
                         <h2 className="text-lg sm:text-xl font-bold">Live Poll Results</h2>
                         <span className="text-sm text-red-500 font-semibold">
@@ -55,12 +55,10 @@ const LiveResults = () => {
                         </span>
                     </div>
 
-                    {/* Poll Question */}
                     <div className="bg-gradient-to-r from-gray-700 to-gray-600 text-white px-4 py-3 rounded-t-md text-sm sm:text-base font-medium">
                         {poll.text}
                     </div>
 
-                    {/* Poll Options */}
                     <div className="border border-gray-200 rounded-b-md px-4 py-4 bg-white space-y-3">
                         {poll.options.map((opt, index) => {
                             const voteCount = results?.answers?.[opt._id] || 0;
@@ -88,7 +86,6 @@ const LiveResults = () => {
                         })}
                     </div>
 
-                    {/* Action Buttons */}
                     <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                         <button
                             onClick={() => navigate("/teacher")}
