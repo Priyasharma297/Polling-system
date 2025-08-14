@@ -8,7 +8,7 @@ const PollHistoryPage = () => {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/polls/history");
+                const res = await axios.get("https://polling-system-backend-t17a.onrender.com");
                 setPollHistory(res.data); // Make sure this matches your backend response
             } catch (err) {
                 console.error("Failed to fetch poll history", err);
