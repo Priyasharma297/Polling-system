@@ -83,7 +83,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Continue Button */}
+      
       <button
         onClick={handleContinue}
         className="bg-primary hover:bg-secondary text-white px-8 py-3 rounded-full text-base font-semibold transition-all duration-300 transform hover:scale-105"
