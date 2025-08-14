@@ -61,7 +61,7 @@ const ChatSidebar = () => {
     return (
         <>
             {/* Floating Button */}
-            <div className="fixed bottom-6 right-6 z-50">
+            <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
                 <button
                     className="bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition"
                     onClick={() => setOpen(!open)}
@@ -72,7 +72,7 @@ const ChatSidebar = () => {
 
             {/* Sidebar Panel */}
             {open && (
-                <div className="fixed bottom-20 right-6 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 z-40 flex flex-col animate-slide-in">
+                <div className="fixed bottom-20 right-2 sm:right-6 w-11/12 sm:w-96 bg-white rounded-xl shadow-2xl border border-gray-200 z-40 flex flex-col animate-slide-in max-h-[80vh] sm:h-80">
                     {/* Tabs */}
                     <div className="flex border-b border-gray-300">
                         {['chat', 'participants'].map((tabName) => (
@@ -90,7 +90,7 @@ const ChatSidebar = () => {
                     </div>
 
                     {/* Content Area */}
-                    <div className="flex-1 flex flex-col p-4 h-80 overflow-hidden">
+                    <div className="flex-1 flex flex-col p-4 overflow-hidden">
                         {tab === 'chat' ? (
                             <div className="flex flex-col h-full">
                                 <div className="flex-1 overflow-y-auto space-y-2 pr-1">
@@ -138,7 +138,7 @@ const ChatSidebar = () => {
                                 </div>
                             </div>
                         ) : (
-                            <div className="overflow-y-auto h-80 text-sm">
+                            <div className="overflow-y-auto h-full text-sm">
                                 <table className="w-full">
                                     <thead>
                                         <tr className="border-b border-gray-300 font-semibold">

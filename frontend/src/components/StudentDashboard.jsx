@@ -18,7 +18,7 @@ const StudentDashboard = () => {
     useEffect(() => {
         socket.on('kicked', () => {
             localStorage.removeItem("studentName");
-            localStorage.removeItem("userRole"); // optional: clear student identity
+            localStorage.removeItem("userRole");
             navigate('/kicked');
         });
 
@@ -38,24 +38,19 @@ const StudentDashboard = () => {
         }
     }, []);
 
-
     const handleRegister = () => {
-        if (name.trim() === "") return;
-
+        if (!name.trim()) return;
         socket.emit("register-student", { name });
-
         socket.once("registration:success", () => {
             localStorage.setItem("studentName", name);
             localStorage.setItem("userRole", "student");
             setIsRegistered(true);
-
             socket.emit("request-participants");
         });
     };
 
     useEffect(() => {
         socket.on("poll-started", (q) => {
-            console.log("Received poll:", q);
             setQuestion(q);
             setSubmitted(false);
             setResult(null);
@@ -63,9 +58,7 @@ const StudentDashboard = () => {
             setTimer(q.timeLimit || 60);
         });
 
-        socket.on("poll-results", (data) => {
-            setResult(data);
-        });
+        socket.on("poll-results", (data) => setResult(data));
 
         return () => {
             socket.off("poll-started");
@@ -77,7 +70,7 @@ const StudentDashboard = () => {
         if (!question || submitted) return;
 
         const interval = setInterval(() => {
-            setTimer((prev) => {
+            setTimer(prev => {
                 if (prev <= 1) {
                     clearInterval(interval);
                     socket.emit("timeout", { questionId: question._id });
@@ -100,64 +93,47 @@ const StudentDashboard = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white px-6">
+        <div className="min-h-screen bg-white px-4 sm:px-6">
             {!isRegistered ? (
                 <div className="min-h-screen flex items-center justify-center bg-white px-4">
-                    <div className="w-full max-w-xl mx-auto text-center">
-                        {/* Badge */}
-                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary text-white mb-6 inline-block">
+                    <div className="w-full max-w-md sm:max-w-xl mx-auto text-center">
+                        <span className="text-xs sm:text-sm font-semibold px-3 py-1 rounded-full bg-purple-600 text-white mb-6 inline-block">
                             ✨ Intervue Poll
                         </span>
 
-                        {/* Headings */}
-                        <h1 className="text-3xl sm:text-4xl font-semibold mb-2">
+                        <h1 className="text-2xl sm:text-3xl font-semibold mb-2">
                             Let’s <span className="font-bold text-black">Get Started</span>
                         </h1>
-                        <p className="text-muted text-sm mb-8">
-                            If you’re a student, you’ll be able to <strong>submit your answers</strong>,
-                            participate in live polls, and see how your responses compare with your classmates.
+                        <p className="text-gray-500 text-sm sm:text-base mb-8">
+                            Submit your answers, participate in live polls, and see how your responses compare with your classmates.
                         </p>
 
-                        {/* Name Input */}
-                        <div className="flex items-center justify-center">
-                            <div className="max-w-md w-full px-4">
-                                <div className="text-left mb-4">
-                                    <label className="text-sm font-medium text-dark block mb-1">
-                                        Enter your Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        placeholder="Your full name"
-                                        className="w-full p-3 rounded-full bg-muted/10 border border-muted text-dark focus:outline-none focus:ring-2 focus:ring-primary"
-                                    />
-                                </div>
-
-                                {/* Continue Button */}
-                                <div className="flex justify-center">
-                                    <button
-                                        onClick={handleRegister}
-                                        className="w-40 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold transition-all hover:opacity-90"
-                                    >
-                                        Continue
-                                    </button>
-                                </div>
-
-                            </div>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <input
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Your full name"
+                                className="w-full sm:flex-1 p-3 rounded-full bg-gray-100 border border-gray-300 text-dark focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            />
+                            <button
+                                onClick={handleRegister}
+                                className="w-full sm:w-auto py-3 px-6 rounded-full bg-gradient-to-r from-purple-600 to-purple-400 text-white font-semibold hover:opacity-90 transition-all"
+                            >
+                                Continue
+                            </button>
                         </div>
                     </div>
                 </div>
-
             ) : (
                 <>
                     <ChatSidebar />
                     {!question ? (
                         <WaitingScreen />
                     ) : (
-                        <div className="min-h-screen flex items-center justify-center bg-white px-4">
-                            <div className="w-full max-w-6xl p-6 rounded-xl shadow-md space-y-6 bg-white">
-                                <h2 className="text-center text-xl font-semibold">Welcome, {name}!</h2>
+                        <div className="min-h-screen flex items-center justify-center bg-white px-4 sm:px-6">
+                            <div className="w-full max-w-full sm:max-w-3xl lg:max-w-6xl p-4 sm:p-6 rounded-xl shadow-md space-y-6 bg-white">
+                                <h2 className="text-center text-xl sm:text-2xl font-semibold">Welcome, {name}!</h2>
 
                                 {/* Show Question */}
                                 {!submitted && (
@@ -172,7 +148,7 @@ const StudentDashboard = () => {
 
                                 {/* Waiting */}
                                 {submitted && !result && (
-                                    <div className="text-center mt-4 text-secondary text-lg font-medium">
+                                    <div className="text-center mt-4 text-purple-600 text-lg sm:text-xl font-medium">
                                         Waiting for results...
                                     </div>
                                 )}

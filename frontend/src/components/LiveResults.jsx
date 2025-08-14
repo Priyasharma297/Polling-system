@@ -45,19 +45,22 @@ const LiveResults = () => {
     return (
         <>
             <ChatSidebar/>
-            <div className="min-h-screen flex items-center p-6 bg-white text-dark">
-                <div className="max-w-6xl w-full mx-auto">
-                    <div className="flex justify-between mb-4">
-                        <h2 className="text-xl font-bold">Live Poll Results</h2>
+            <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 bg-white text-dark">
+                <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-6xl">
+                    {/* Header */}
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2 sm:gap-0">
+                        <h2 className="text-lg sm:text-xl font-bold">Live Poll Results</h2>
                         <span className="text-sm text-red-500 font-semibold">
                             ⏱ {timer < 10 ? `0${timer}` : timer}s
                         </span>
                     </div>
 
-                    <div className="bg-gradient-to-r from-gray-700 to-gray-600 text-white px-4 py-3 rounded-t-md text-sm font-medium">
+                    {/* Poll Question */}
+                    <div className="bg-gradient-to-r from-gray-700 to-gray-600 text-white px-4 py-3 rounded-t-md text-sm sm:text-base font-medium">
                         {poll.text}
                     </div>
 
+                    {/* Poll Options */}
                     <div className="border border-gray-200 rounded-b-md px-4 py-4 bg-white space-y-3">
                         {poll.options.map((opt, index) => {
                             const voteCount = results?.answers?.[opt._id] || 0;
@@ -65,18 +68,18 @@ const LiveResults = () => {
 
                             return (
                                 <div key={opt._id}>
-                                    <div className="flex items-center gap-2 text-sm font-medium mb-1">
-                                        <span className="w-6 h-6 flex items-center justify-center bg-primary text-white font-bold rounded-full text-xs">
+                                    <div className="flex items-center gap-2 text-sm sm:text-base font-medium mb-1 flex-wrap">
+                                        <span className="w-6 h-6 flex items-center justify-center bg-purple-600 text-white font-bold rounded-full text-xs sm:text-sm">
                                             {index + 1}
                                         </span>
-                                        <span>{opt.text}</span>
+                                        <span className="truncate max-w-full sm:max-w-[90%]">{opt.text}</span>
                                     </div>
                                     <div className="relative w-full bg-gray-100 rounded-lg h-6 overflow-hidden">
                                         <div
-                                            className="bg-primary h-6 rounded-lg transition-all duration-500"
+                                            className="bg-purple-600 h-6 rounded-lg transition-all duration-500"
                                             style={{ width: `${percent}%` }}
                                         />
-                                        <div className="absolute inset-0 flex items-center justify-end pr-3 text-xs font-semibold text-gray-800">
+                                        <div className="absolute inset-0 flex items-center justify-end pr-2 sm:pr-3 text-xs sm:text-sm font-semibold text-gray-800">
                                             {percent}%
                                         </div>
                                     </div>
@@ -85,16 +88,17 @@ const LiveResults = () => {
                         })}
                     </div>
 
-                    <div className="mt-6 flex justify-center gap-4">
+                    {/* Action Buttons */}
+                    <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                         <button
                             onClick={() => navigate("/teacher")}
-                            className="bg-primary text-white px-5 py-2 rounded-full font-medium hover:bg-primary/80"
+                            className="bg-purple-600 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-700 w-full sm:w-auto"
                         >
                             + Ask a new question
                         </button>
                         <button
                             onClick={() => navigate("/poll-history")}
-                            className="bg-purple-400 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-500"
+                            className="bg-purple-400 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-500 w-full sm:w-auto"
                         >
                             👁 View Poll History
                         </button>

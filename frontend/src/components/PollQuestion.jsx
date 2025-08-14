@@ -12,20 +12,19 @@ const PollQuestion = ({
     const timeLimit = question?.timeLimit || 60;
     const timePercentage = (timer / timeLimit) * 100;
 
-
     return (
-        <div className="m-auto max-w-6xl w-full bg-white px-4">
-            <div className="p-4">
+        <div className="mx-auto max-w-full sm:max-w-3xl lg:max-w-6xl w-full bg-white px-4 sm:px-6">
+            <div className="p-4 sm:p-6">
                 {/* Header */}
-                <div className="flex justify-between items-center mb-2">
-                    <h2 className="text-lg font-bold text-black">Question</h2>
-                    <span className="text-sm font-semibold text-red-500">
-                        ⏱ {timer < 10 ? `0${timer}` : timer}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2 gap-2">
+                    <h2 className="text-lg sm:text-xl font-bold text-black">Question</h2>
+                    <span className="text-sm sm:text-base font-semibold text-red-500">
+                        ⏱ {timer < 10 ? `0${timer}` : timer}s
                     </span>
                 </div>
 
                 {/* Question Box */}
-                <div className="rounded-t-md bg-gradient-to-r from-gray-700 to-gray-800 text-white px-4 py-2 font-medium">
+                <div className="rounded-t-md bg-gradient-to-r from-gray-700 to-gray-800 text-white px-4 py-2 font-medium text-sm sm:text-base">
                     {question.text}
                 </div>
 
@@ -45,7 +44,7 @@ const PollQuestion = ({
                         return (
                             <label
                                 key={opt._id}
-                                className={`flex items-center justify-between px-4 py-2 rounded-md transition-all text-left relative
+                                className={`flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 py-2 rounded-md transition-all text-left relative
                 ${submitted
                                         ? "bg-gray-100"
                                         : isSelected
@@ -53,25 +52,29 @@ const PollQuestion = ({
                                             : "hover:bg-gray-50 border"
                                     }`}
                             >
-                                <div className="flex items-center space-x-3 z-10">
+                                <div className="flex items-center space-x-3 z-10 flex-wrap sm:flex-nowrap">
                                     <span
-                                        className={`w-6 h-6 flex items-center justify-center text-sm rounded-full border font-bold
-                        ${submitted ? "bg-primary text-white" : "border-gray-400 text-gray-700"}`}
+                                        className={`w-6 h-6 flex items-center justify-center text-sm sm:text-base rounded-full border font-bold
+                        ${submitted ? "bg-purple-600 text-white" : "border-gray-400 text-gray-700"}`}
                                     >
                                         {index + 1}
                                     </span>
-                                    <span className="text-sm font-medium text-black">{opt.text}</span>
+                                    <span className="text-sm sm:text-base font-medium text-black truncate max-w-[90%]">
+                                        {opt.text}
+                                    </span>
                                 </div>
 
                                 {submitted && (
                                     <div
-                                        className="absolute top-0 left-0 h-full rounded-md bg-primary opacity-20 z-0"
+                                        className="absolute top-0 left-0 h-full rounded-md bg-purple-600 opacity-20 z-0"
                                         style={{ width: `${percentage}%` }}
                                     ></div>
                                 )}
 
                                 {submitted && (
-                                    <span className="z-10 font-semibold text-sm text-black">{percentage}%</span>
+                                    <span className="z-10 font-semibold text-sm sm:text-base text-black mt-1 sm:mt-0">
+                                        {percentage}%
+                                    </span>
                                 )}
 
                                 <input
@@ -85,7 +88,6 @@ const PollQuestion = ({
                             </label>
                         );
                     })}
-
                 </div>
 
                 {/* Submit Button */}
@@ -94,7 +96,7 @@ const PollQuestion = ({
                         <button
                             onClick={handleSubmit}
                             disabled={!selectedOption}
-                            className="bg-primary text-white font-medium px-6 py-2 rounded-full hover:opacity-90 transition-all disabled:opacity-50"
+                            className="bg-purple-600 text-white font-medium px-6 py-2 sm:px-8 sm:py-3 rounded-full hover:opacity-90 transition-all disabled:opacity-50 w-full sm:w-auto"
                         >
                             Submit
                         </button>
@@ -103,7 +105,7 @@ const PollQuestion = ({
 
                 {/* After Submit Message */}
                 {submitted && (
-                    <p className="text-center mt-6 font-medium text-primary text-lg">
+                    <p className="text-center mt-6 font-medium text-purple-600 text-base sm:text-lg">
                         Wait for the teacher to ask a new question...
                     </p>
                 )}
